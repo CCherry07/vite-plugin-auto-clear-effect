@@ -28,10 +28,8 @@ export default function PluginAutoClear(): Plugin {
               const importCode = `import { onScopeDispose } from 'vue'`
               const frontInsertion = new RegExp(/<script setup[^<>]*>/)
               const frontInsertionResult = code.match(frontInsertion)
-              s.appendLeft(frontInsertionResult[0].length + frontInsertionResult?.index, `import { onScopeDispose } from 'vue'`)
+              s.appendRight(frontInsertionResult![0].length + frontInsertionResult?.index!, importCode)
             }
-            console.log(s.toString());
-
             const watchCode = watchResult ? watchResult[0] : ''
             const hash = `watch${createHash('sha256')
               .digest('hex')
